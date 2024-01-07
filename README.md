@@ -1,118 +1,99 @@
-# Digital Twin with OPC UA
-This repository contains files used in the development of a digital twin (DTw) for a robot cell at NTNU with the use of Visual Components 4.0 (VC 4.0) and OPC UA.
-
-**Master's Thesis:** http://hdl.handle.net/11250/2561319
-
-**Grade:** A
-
-## Result
-The system currently contains the following functionality:
-1. Programming, planning and control in VC 4.0
-2. Mirror movements of physical robot cell in real-time using KUKAVARPROXY (KVP), <br />
-average read time 8.75ms
-3. Mirror movements of physical robot cell in real-time using RSI, <br />
-average read time 4.00ms
-4. Plot sensor data for every KUKA robot:
-   * Velocity of the motors controlling all axes
-   * Torque on the motors controlling all axes
-   * Current to the motors controlling all axes
-   * Temperature of the motors controlling all axes
-5. Write sensor data for every KUKA robot to .csv files:
-   * Velocity to file
-   * Torque to file
-   * Current to file
-   * Temperature to file
-6. GUI for access to functionalities
-7. Extraction of physical robot properties through XML
-8. Controlling physical robots from VC 4.0 using KVP
-
-It was done a fixed case with camera tracking to illustrate some of the functionalities of the DTw: <br /> 
-https://youtu.be/xlQhQPmJwlA
-
-## Needs improvement
-- [ ] MDA approach to OPC UA information model design
-- [ ] Avoid middleware between PC running VC 4.0 and KR C4 robot controllers
-- [ ] Remove lag in control of robots through VC 4.0 using KVP
-- [ ] Development of an OPC UA server controlling robots through VC 4.0, using RSI
-- [ ] Move plotting of data, and camera stream, from middleware to VC 4.0
-- [ ] Develop a more accurate calibrated model of the robot cell
-- [ ] Gather all functionalities in one server
-- [ ] Add sharing of sensor data to online databases
-
-For more information about improvements, see the project report section 5.1.2: <br />
-http://hdl.handle.net/11250/2561319
-
----
-
-## About Project
-This project was initiated by the Norwegian University of Science and Technology (NTNU), Department of Production Technology. The aim of the project was the following:
-
-In order to respond quickly to unexpected events and new demands without extensive system changes, future production systems must be able to work more independently. There is a need for intelligent machines that perform complex tasks without detailed programming and without human interaction. Autonomous systems know their own abilities (which are modeled as "skills") and their state. They are able to choose between a set of possible actions, orchestrating and perform their skills. To succeed, the autonomous systems need to have realistic models of the current state of the production process and the system's own behaviour in interaction with its external environment - usually called a digital twin. 
-
-OPC Unified Architecture (OPC UA) is a platform-independent protocol for machine-to-machine communication for industrial automation developed by the OPC Foundation. OPC focuses on accessing large amounts of real-time data at the same time as system performance is affected to a minimum. OPC UA has the potential to become an important foundation in the future industrial environment where machines deliver "production as a service", and all machines and sensors in production are online (Internet of Things).
-
-In this task, implementation of a digital twin will be studied. A solution must be developed that provides seamless communication between robots, PLSs, and other relevant control systems that can be part of an industrial production system, linked to one digital representation of the system. The system must be tested at the institute Robot Laboratory.
-
-**a)** Describe how a digital twin can be implemented using OPC UA.
-
-**b)** Examine the advantages and disadvantages of using Visual Components 4.0 or similar simulation software <br />
-   for the digital twin.
-   
-**c)** Use Visual Components 4.0 or similar simulation software to model and simulate the robot cell at the Institute.
-
-**d)** Examine the advantages and disadvantages of using KUKAVARPROXY and KUKA RSI Ethernet as middleware <br />
-   between the KUKA KR C4 robot controllers and the digital twin.
-   
-**e)** Present a solution for a digital twin of the Institute's Robot Laboratory with use of OPC UA for communication.
-
-**f)** Try out the system in a fixed case. Evaluate the results.
-
-## Abstract
-This project explores the term Industry 4.0 (I 4.0) and the use of Digital Twins (DTws) as an asset in this modern industrial revolution. A DTw can be described as a digital replica of a physical system including data about this systems interaction with its environment. The goal of this project has been to develop a DTw for a robot cell at MTP Valgrinda, NTNU, and investigate what benefits could be gained from introducing the technology in this system and the domain of automated robotic systems in general. 
-
-The DTw was developed using the OPC UA communication architecture. OPC UA is called the pioneer of I 4.0 as it is a communication architecture aiming at the standardization of communication in industry. Three different visualization software solutions were compared. It was concluded that Visual Components 4.0 (VC 4.0) was the strongest candidate for developing a visual representation of the robot cell. Using VC 4.0 and OPC UA a DTw of the robot cell was created. 
-
-Most of the work done in this project revolved around creating communication modules able to connect the physical robot cell to the virtual representation in VC 4.0, through the use of OPC UA. The result of this work is a communication library containing the virtual representation of the robot cell and the different communication modules able to give the DTw various functionalities. This library is made open-source and can be found in the project's GitHub repository at 
-
-https://github.com/akselov/digital-twin-opcua
-
-The software included in this library enables the DTw to do real-time mirroring of the physical robot's movements, plotting of robotic sensor data and controlling the robots from the DTw. A graphical user interface was developed to organize the functionalities. Figure 2 illustrates the current communication architecture for the DTw.
-
-The DTw was tested in a fixed case. This was a multi-robot case including mirroring of movements, plotting of sensor data and control from VC 4.0. It was made a video from the case which is published online at
-
-https://youtu.be/xlQhQPmJwlA
-
-It was concluded that OPC UA was a good solution for use in this DTw as it is possible to implement on any platform, and is enabling a more flexible and structured way of communicating than traditional communication software used in client/server based systems. The benefits found with the use of the DTw in this automated robotic system included visibility to operations and a better foundation for statistical analysis to predict future states and for optimizing characteristic parameters associated with the robot cell. Finally, it was concluded that the DTw act as a good foundation for managing a complex system, something that could be beneficial as this specific system is used in training and professional development at the institute.
-
-![Figure 1](https://github.com/akselov/digital-twin-opcua/blob/master/pictures/Physical_%26_digital_model.png)
-<br />**Figure 1: Robot cell, physical and digital**
-
-
-![Figure 2](https://github.com/akselov/digital-twin-opcua/blob/master/pictures/InformationFlow.png)
-**Figure 2: Current communication architecture**
-
-
-## Python GUI
-GUI for launching Visual Components 4.0 OPC UA connection, displaying robot sensor data and writing data to .csv files.
-
-![Figure 3](https://github.com/akselov/digital-twin-opcua/blob/master/pictures/gui_full.png)
-**Figure 3: GUI**
-
-## Visual Components 4.0
-This library contains two files of the robot cell from VC 4.0:
-1. *Robot_Cell_MTP.vcmx*, Version compatible with all servers developed, <br />
-including one example OPC UA client set up for controlling the KUKA KR 16-2 from VC 4.0
-2. *Robot_Cell_MTP_case.vcmx*, Version used in the fixed case, including two OPC UA clients set up. <br />
-One for controlling the KUKA KR 120 R2500 from VC 4.0, and one for extracting the axis variables <br />
-from the KUKA KR 16-2 and mirror its movements in VC 4.0.
-
-![Figure 4](https://github.com/akselov/digital-twin-opcua/blob/master/pictures/VCmodel.png)
-**Figure 4: Screenshot from VC 4.0**
-
-## Acknowledgments
-The software developed in this project is based on work by: 
-- Massimiliano Fago (https://sourceforge.net/projects/openshowvar)
-- Mechatronics Lab at AAlesund University College (https://github.com/aauc-mechlab/JOpenShowVar)
-- Ahmad Saeed (https://github.com/akselov/kukavarproxy-msg-format)
-- Olivier Roulet-Dubonnet (https://github.com/FreeOpcUa)
-- Torstein Anderssen Myhre (https://github.com/torstem/examplecode-kukarsi-python)
+<div class="Box-sc-g0xbh4-0 bJMeLZ js-snippet-clipboard-copy-unpositioned" data-hpc="true"><article class="markdown-body entry-content container-lg" itemprop="text"><h1 tabindex="-1" dir="auto"><a id="user-content-digital-twin-with-opc-ua" class="anchor" aria-hidden="true" tabindex="-1" href="#digital-twin-with-opc-ua"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用 OPC UA 的数字孪生</font></font></h1>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">该存储库包含使用 Visual Components 4.0 (VC 4.0) 和 OPC UA 为 NTNU 机器人单元开发数字孪生 (DTw) 时使用的文件。</font></font></p>
+<p dir="auto"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">硕士论文：</font></font></strong> <a href="http://hdl.handle.net/11250/2561319" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">http://hdl.handle.net/11250/2561319</font></font></a></p>
+<p dir="auto"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">等级：</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> A</font></font></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-result" class="anchor" aria-hidden="true" tabindex="-1" href="#result"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">结果</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">目前该系统包含以下功能：</font></font></p>
+<ol dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">VC 4.0 中的编程、规划和控制</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用 KUKAVARPROXY (KVP) 实时镜像物理机器人单元的运动，</font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+平均读取时间 8.75ms</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用 RSI 实时镜像物理机器人单元的运动，</font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+平均读取时间 4.00ms</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">绘制每个 KUKA 机器人的传感器数据：
+</font></font><ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">控制所有轴的电机速度</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">控制所有轴的电机上的扭矩</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">控制所有轴的电机电流</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">控制所有轴的电机温度</font></font></li>
+</ul>
+</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">将每个 KUKA 机器人的传感器数据写入 .csv 文件：
+</font></font><ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">归档速度</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">锉刀扭矩</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">当前归档</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">温度归档</font></font></li>
+</ul>
+</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用于访问功能的 GUI</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通过XML提取机器人物理属性</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用KVP从VC 4.0控制物理机器人</font></font></li>
+</ol>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">这是一个带有摄像头跟踪的固定案例，以说明 DTw 的一些功能： https: </font></font><br>
+<a href="https://youtu.be/xlQhQPmJwlA" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">//youtu.be/xlQhQPmJwlA</font></font></a></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-needs-improvement" class="anchor" aria-hidden="true" tabindex="-1" href="#needs-improvement"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">需要改进</font></font></h2>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OPC UA 信息模型设计的 MDA 方法</font></font></li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">避免运行 VC 4.0 的 PC 和 KR C4 机器人控制器之间的中间件</font></font></li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用 KVP 通过 VC 4.0 消除机器人控制中的滞后</font></font></li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用 RSI 通过 VC 4.0 开发控制机器人的 OPC UA 服务器</font></font></li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">将数据绘图和摄像头流从中间件移至 VC 4.0</font></font></li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">开发更准确的机器人单元校准模型</font></font></li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">将所有功能集中在一台服务器上</font></font></li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">将传感器数据共享添加到在线数据库</font></font></li>
+</ul>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">有关改进的更多信息，请参阅项目报告第 5.1.2 节：</font></font><br>
+<a href="http://hdl.handle.net/11250/2561319" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">http://hdl.handle.net/11250/2561319</font></font></a></p>
+<hr>
+<h2 tabindex="-1" dir="auto"><a id="user-content-about-project" class="anchor" aria-hidden="true" tabindex="-1" href="#about-project"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">关于项目</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">该项目由挪威科技大学（NTNU）生产技术系发起。</font><font style="vertical-align: inherit;">该项目的目标如下：</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">为了快速响应突发事件和新需求而无需进行大量系统更改，未来的生产系统必须能够更加独立地工作。</font><font style="vertical-align: inherit;">人们需要智能机器来执行复杂的任务，而无需详细的编程和人工交互。</font><font style="vertical-align: inherit;">自治系统知道自己的能力（被建模为“技能”）和状态。</font><font style="vertical-align: inherit;">他们能够在一组可能的行动中进行选择，编排并发挥他们的技能。</font><font style="vertical-align: inherit;">为了取得成功，自主系统需要拥有生产过程当前状态的真实模型以及系统自身与其外部环境交互的行为——通常称为数字孪生。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OPC 统一架构 (OPC UA) 是由 OPC 基金会开发的独立于平台的工业自动化机器对机器通信协议。</font><font style="vertical-align: inherit;">OPC专注于访问大量实时数据，同时将系统性能影响降到最低。</font><font style="vertical-align: inherit;">OPC UA有潜力成为未来工业环境的重要基础，其中机器提供“生产即服务”，并且生产中的所有机器和传感器都是在线的（物联网）。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在此任务中，将研究数字孪生的实施。</font><font style="vertical-align: inherit;">必须开发一种解决方案，在机器人、PLS 和其他相关控制系统之间提供无缝通信，这些控制系统可以成为工业生产系统的一部分，并链接到系统的一个数字表示形式。</font><font style="vertical-align: inherit;">该系统必须在研究所机器人实验室进行测试。</font></font></p>
+<p dir="auto"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">a)</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">描述如何使用 OPC UA 实施数字孪生。</font></font></p>
+<p dir="auto"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">b)</font></font></strong><font style="vertical-align: inherit;"></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查使用 Visual Components 4.0 或类似模拟软件
+进行数字孪生</font><font style="vertical-align: inherit;">的优点和缺点。</font></font></p>
+<p dir="auto"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">c)</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用Visual Components 4.0或类似的仿真软件对研究所的机器人单元进行建模和仿真。</font></font></p>
+<p dir="auto"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">d)</font></font></strong><font style="vertical-align: inherit;"></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查使用 KUKAVARPROXY 和 KUKA RSI 以太网
+作为 KUKA KR C4 机器人控制器和数字孪生之间的</font><font style="vertical-align: inherit;">中间件的优点和缺点。</font></font></p>
+<p dir="auto"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">e)</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">提出使用 OPC UA 进行通信的研究所机器人实验室的数字孪生解决方案。</font></font></p>
+<p dir="auto"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">f)</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在固定的情况下试用系统。</font><font style="vertical-align: inherit;">评估结果。</font></font></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-abstract" class="anchor" aria-hidden="true" tabindex="-1" href="#abstract"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">抽象的</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">该项目探讨了工业 4.0 (I 4.0) 一词以及数字孪生 (DTws) 作为现代工业革命中的一项资产的使用。</font><font style="vertical-align: inherit;">DTw 可以描述为物理系统的数字副本，包括有关该系统与其环境交互的数据。</font><font style="vertical-align: inherit;">该项目的目标是为 NTNU MTP Valgrinda 的机器人单元开发 DTw，并研究在该系统和一般自动化机器人系统领域引入该技术可以获得哪些好处。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">DTw是使用OPC UA通信架构开发的。</font><font style="vertical-align: inherit;">OPC UA被称为I 4.0的先驱，因为它是一种旨在工业通信标准化的通信架构。</font><font style="vertical-align: inherit;">比较了三种不同的可视化软件解决方案。</font><font style="vertical-align: inherit;">结论是，Visual Components 4.0 (VC 4.0) 是开发机器人单元视觉表示的最强候选者。</font><font style="vertical-align: inherit;">使用 VC 4.0 和 OPC UA 创建了机器人单元的 DTw。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">该项目中完成的大部分工作都围绕创建通信模块，该模块能够通过使用 OPC UA 将物理机器人单元连接到 VC 4.0 中的虚拟表示。</font><font style="vertical-align: inherit;">这项工作的结果是一个通信库，其中包含机器人单元的虚拟表示以及能够为 DTw 提供各种功能的不同通信模块。</font><font style="vertical-align: inherit;">该库是开源的，可以在项目的 GitHub 存储库中找到：</font></font></p>
+<p dir="auto"><a href="https://github.com/akselov/digital-twin-opcua"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/akselov/digital-twin-opcua</font></font></a></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">该库中包含的软件使 DTw 能够实时镜像物理机器人的运动、绘制机器人传感器数据并从 DTw 控制机器人。</font><font style="vertical-align: inherit;">开发了图形用户界面来组织功能。</font><font style="vertical-align: inherit;">图 2 说明了 DTw 当前的通信架构。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">DTw 在固定情况下进行了测试。</font><font style="vertical-align: inherit;">这是一个多机器人案例，包括运动镜像、传感器数据绘制和 VC 4.0 控制。</font><font style="vertical-align: inherit;">该案件被制作成视频，并发布在网上：</font></font></p>
+<p dir="auto"><a href="https://youtu.be/xlQhQPmJwlA" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://youtu.be/xlQhQPmJwlA</font></font></a></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">结论是，OPC UA 是在此 DTw 中使用的良好解决方案，因为它可以在任何平台上实施，并且与基于客户端/服务器的系统中使用的传统通信软件相比，能够实现更灵活和结构化的通信方式。</font><font style="vertical-align: inherit;">在该自动化机器人系统中使用 DTw 的好处包括操作可见性以及为统计分析奠定更好的基础，以预测未来状态以及优化与机器人单元相关的特征参数。</font><font style="vertical-align: inherit;">最后得出的结论是，DTw 是管理复杂系统的良好基础，这可能是有益的，因为该特定系统用于研究所的培训和专业发展。</font></font></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="https://github.com/akselov/digital-twin-opcua/blob/master/pictures/Physical_%26_digital_model.png"><img src="https://github.com/akselov/digital-twin-opcua/raw/master/pictures/Physical_%26_digital_model.png" alt="图1" style="max-width: 100%;"></a>
+<br><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">图 1：机器人单元，物理和数字</font></font></strong></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="https://github.com/akselov/digital-twin-opcua/blob/master/pictures/InformationFlow.png"><img src="https://github.com/akselov/digital-twin-opcua/raw/master/pictures/InformationFlow.png" alt="图2" style="max-width: 100%;"></a>
+<strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">图2：当前的通信架构</font></font></strong></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-python-gui" class="anchor" aria-hidden="true" tabindex="-1" href="#python-gui"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Python图形用户界面</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用于启动 Visual Components 4.0 OPC UA 连接、显示机器人传感器数据并将数据写入 .csv 文件的 GUI。</font></font></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="https://github.com/akselov/digital-twin-opcua/blob/master/pictures/gui_full.png"><img src="https://github.com/akselov/digital-twin-opcua/raw/master/pictures/gui_full.png" alt="图3" style="max-width: 100%;"></a>
+<strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">图 3：图形用户界面</font></font></strong></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-visual-components-40" class="anchor" aria-hidden="true" tabindex="-1" href="#visual-components-40"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">视觉组件4.0</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">该库包含 VC 4.0 中机器人单元的两个文件：</font></font></p>
+<ol dir="auto">
+<li><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Robot_Cell_MTP.vcmx</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，与开发的所有服务器兼容的版本，</font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+包括一个用于从 VC 4.0 控制 KUKA KR 16-2 的示例 OPC UA 客户端设置</font></font></li>
+<li><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Robot_Cell_MTP_case.vcmx</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，固定情况下使用的版本，包括设置的两个 OPC UA 客户端。</font><font style="vertical-align: inherit;">
+一种用于从 VC 4.0 控制 KUKA KR 120 R2500，另一种用于从 KUKA KR 16-2 中</font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+提取轴变量并在 VC 4.0 中镜像其运动。</font></font><br><font style="vertical-align: inherit;"></font></li>
+</ol>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="https://github.com/akselov/digital-twin-opcua/blob/master/pictures/VCmodel.png"><img src="https://github.com/akselov/digital-twin-opcua/raw/master/pictures/VCmodel.png" alt="图4" style="max-width: 100%;"></a>
+<strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">图 4：VC 4.0 的屏幕截图</font></font></strong></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-acknowledgments" class="anchor" aria-hidden="true" tabindex="-1" href="#acknowledgments"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">致谢</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">该项目开发的软件基于以下人员的工作：</font></font></p>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">马西米利亚诺·法戈 ( </font></font><a href="https://sourceforge.net/projects/openshowvar" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://sourceforge.net/projects/openshowvar</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> )</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">AAlesund 大学学院机电一体化实验室 ( </font></font><a href="https://github.com/aauc-mechlab/JOpenShowVar"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/aauc-mechlab/JOpenShowVar</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> )</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">艾哈迈德·赛义德 ( </font></font><a href="https://github.com/akselov/kukavarproxy-msg-format"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/akselov/kukavarproxy-msg-format</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> )</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">奥利维尔·鲁莱特-杜邦内 ( </font></font><a href="https://github.com/FreeOpcUa"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/FreeOpcUa</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> )</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">托斯坦·安德森·迈尔 ( </font></font><a href="https://github.com/torstem/examplecode-kukarsi-python"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/torstem/examplecode-kukarsi-python</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> )</font></font></li>
+</ul>
+</article></div>
